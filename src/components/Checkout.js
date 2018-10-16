@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { cartAddition, cartDeletion } from '../store';
-import { Image, Button, Banner, Flex, Icon, Box, Heading } from 'pcln-design-system';
+import { Divider, Image, Button, Banner, Flex, Icon, Box, Heading } from 'pcln-design-system';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -18,6 +18,13 @@ height: 500px;
 width: 500px;
 `
 
+const StyledDiv = styled.div`
+display: flex;
+flex-wrap: wrap;
+margin: 9rem;
+
+`
+
 export const Checkout = (props) => {
   console.log(props)
 
@@ -25,6 +32,9 @@ export const Checkout = (props) => {
 
     <ul key={index}>{`Item number: ${item.key}`}
     <StyledImg alt='vaca' src='https://source.unsplash.com/bITjK6W2Alw/1024x768?q=20' />
+    <Button size='large' mr={2} onClick={() => props.addToTheCart({key: Math.floor(Math.random() * 100)})}>
+      Add to cart
+    </Button>
     <Button size='large' mr={2} onClick={() => props.deleteFromTheCart({key: item.key})}>
       Delete from Cart
     </Button>
@@ -47,9 +57,15 @@ export const Checkout = (props) => {
     </Box>
   </Flex>
   </Banner>
-    <h2>Hi hello you are checking out now.</h2>
+  {
+    props.cart.length > 0 ?
+    <div>
     <h2>{`You have products ${props.cart.length} in your cart`}</h2>
-    {finalCart}
+    <StyledDiv>
+    {finalCart} <Divider m={2} /> </StyledDiv>    </div>
+    : <h2> Your shopping cart is empty! Please continue browsing through our travel bargains!</h2>
+  }
+
     </div>
   )
 }

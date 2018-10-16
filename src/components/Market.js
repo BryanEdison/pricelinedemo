@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RatingBadge, Stamp, Icon, Text } from 'pcln-design-system';
+import { RatingBadge, Stamp, Icon } from 'pcln-design-system';
 import { Link } from 'react-router-dom';
 
 export default class Market extends Component {
