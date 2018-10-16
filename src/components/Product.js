@@ -17,8 +17,15 @@ text-decoration: none;
 const StyledImg = styled(Image)`
 height: 500px;
 width: 500px;
+display: block;
+margin-left: auto;
+margin-right: auto
 `
-
+const StyledDiv = styled('div')`
+margin-top: 20px;
+text-align: center;
+align-items: center;
+`
 
 
 export const Product = (props) => {
@@ -47,6 +54,7 @@ export const Product = (props) => {
     </Box>
   </Flex>
 </Banner>
+      <StyledDiv>
       <StyledImg
     alt='Vacation'
     src='https://source.unsplash.com/bITjK6W2Alw/1024x768?q=20'
@@ -55,6 +63,7 @@ export const Product = (props) => {
       <Button size='large' mr={2} onClick={() => props.addToTheCart({key: Math.floor(Math.random() * 100)})}>
       Add to cart
     </Button>
+    </StyledDiv>
       </div>
     )
 

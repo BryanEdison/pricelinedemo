@@ -22,11 +22,13 @@ const StyledDiv = styled.div`
 display: flex;
 flex-wrap: wrap;
 margin: 9rem;
-
+`
+const Styledh2 = styled.h2`
+margin-top: 20px;
+text-align: center;
 `
 
 export const Checkout = (props) => {
-  console.log(props)
 
   const finalCart = props.cart.map((item, index) =>
 
@@ -60,7 +62,7 @@ export const Checkout = (props) => {
   {
     props.cart.length > 0 ?
     <div>
-    <h2>{`You have products ${props.cart.length} in your cart`}</h2>
+    <Styledh2>{`You have products ${props.cart.length} in your cart`}</Styledh2>
     <StyledDiv>
     {finalCart} <Divider m={2} /> </StyledDiv>    </div>
     : <h2> Your shopping cart is empty! Please continue browsing through our travel bargains!</h2>
