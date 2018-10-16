@@ -83,7 +83,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = function(state) {
   return {
-    product: state.currentProduct,
     cart: state.cart
   }
 }

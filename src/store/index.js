@@ -6,17 +6,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 //FAKE DATABASE
 let cart = []
-let currentProduct = {}
 
 //Fake Ajax requests
 //Functions turned into promises
-function get(product) {
-  return new Promise(function (resolve, reject) {
-    currentProduct = product;
-    if (currentProduct !== product) reject('Error')
-    else resolve(currentProduct)
-  })
-}
 
 function addProductToCart(product) {
   return new Promise(function (resolve, reject) {
@@ -39,22 +31,15 @@ function deleteProductFromCart(product) {
 
 //INITIAL STATE//
 const initialState = {
-  product: {},
   cart: []
 }
 
 //ACTION TYPE//
-const GET_PRODUCT = 'GET_PRODUCT';
 const ADD_TO_CART = 'ADD_TO_CART';
 const DELETE_FROM_CART = 'DELETE_TO_CART';
 
 
 //ACTION CREATOR//
-export function getProduct(product) {
-  const action = { type: GET_PRODUCT, product };
-  return action;
-}
-
 
 export function addtoCart(product) {
   const action = { type: ADD_TO_CART, product };
@@ -70,15 +55,6 @@ export function deleteFromCart(cart) {
 
 //THUNKS//
 
-export function fetchProduct(product) {
-  return function thunk(dispatch) {
-    return get(product)
-      .then(product => {
-        const action = getProduct(product);
-        dispatch(action);
-      })
-  }
-}
 
 export function cartAddition(product) {
   return function thunk(dispatch) {
@@ -109,8 +85,6 @@ export function cartDeletion(product) {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCT:
-      return Object.assign({}, { product: action.product });
 
     case ADD_TO_CART:
       return Object.assign({}, state, { cart: [...state.cart, action.product] });
