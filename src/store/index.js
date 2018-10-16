@@ -21,16 +21,18 @@ function get(product) {
 function addProductToCart(product) {
   return new Promise(function (resolve, reject) {
     cart.push(product);
-    if (cart.length === 0) reject('Error')
+    if (cart.length === 0) reject('Error in add thunk')
     else resolve(cart)
   })
 }
 
 function deleteProductFromCart(product) {
   return new Promise(function (resolve, reject) {
-    cart = cart.filter(item => item.name !== product);
-    if (cart.length > 0) reject('Error')
-    else resolve(cart)
+    // console.log('cart1', cart);
+    cart = cart.filter(item => item.key !== product.key);
+    // console.log('cart2', cart);
+    if (product.length < 0) reject('Error in delete thunk')
+    else resolve(product)
   })
 }
 
@@ -59,8 +61,8 @@ export function addtoCart(product) {
   return action;
 }
 
-export function deleteFromCart(product) {
-  const action = { type: DELETE_FROM_CART, product };
+export function deleteFromCart(cart) {
+  const action = { type: DELETE_FROM_CART, cart };
   return action;
 }
 
@@ -82,6 +84,7 @@ export function cartAddition(product) {
   return function thunk(dispatch) {
     return addProductToCart(product)
       .then(cart => {
+        console.log('ADD THUNK RESPONSE', cart)
         const action = addtoCart(product);
         console.log(cart);
         dispatch(action);
@@ -93,6 +96,7 @@ export function cartDeletion(product) {
   return function thunk(dispatch) {
     return deleteProductFromCart(product)
       .then(cart => {
+        console.log('DELETE THUNK RESPONSE', product)
         const action = deleteFromCart(product);
         dispatch(action);
       })
@@ -112,7 +116,10 @@ function reducer(state = initialState, action) {
       return Object.assign({}, state, { cart: [...state.cart, action.product] });
 
     case DELETE_FROM_CART:
-      return Object.assign({}, state, { cart: [...state] });
+    console.log('reducer', action, state)
+    return Object.assign({}, state, {
+      cart: [...state.cart.filter(item => item.key !== action.cart.key)],
+    });
 
     default:
       return state;

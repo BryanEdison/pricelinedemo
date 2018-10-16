@@ -15,13 +15,14 @@ text-decoration: none;
 }
 `
 const StyledImg = styled(Image)`
-height: 80px;
-width: 80px;
+height: 500px;
+width: 500px;
 `
 
 
 
 export const Product = (props) => {
+  console.log('Product props', props);
     return (
 
       <div>
@@ -51,7 +52,7 @@ export const Product = (props) => {
     src='https://source.unsplash.com/bITjK6W2Alw/1024x768?q=20'
   />
       <h2>Bahama getaway!</h2>
-      <Button size='large' mr={2} onClick={() => props.addToTheCart({key: 'hi'})}>
+      <Button size='large' mr={2} onClick={() => props.addToTheCart({key: Math.floor(Math.random() * 100)})}>
       Add to cart
     </Button>
       </div>
